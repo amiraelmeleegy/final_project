@@ -43,6 +43,9 @@ const server = http.createServer(app);
 
 const IS_PROD = process.env.NODE_ENV === "production";
 const PORT = Number(process.env.PORT || 5555);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 const HOST = process.env.HOST || "0.0.0.0";
 const ORDER_TIMEOUT_SEC = Number(process.env.ORDER_TIMEOUT_SEC || 60);
 const BODY_LIMIT = process.env.BODY_LIMIT || "2mb";
