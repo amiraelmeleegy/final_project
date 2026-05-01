@@ -1141,5 +1141,9 @@ async function gracefulShutdown(signal) {
   }
 }
 
+app.get("/", (req, res) => {
+  res.send("Server is running 🚀");
+});
+
 process.on("SIGINT", () => gracefulShutdown("SIGINT"));
 process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
