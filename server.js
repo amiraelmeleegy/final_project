@@ -61,6 +61,16 @@ app.set("trust proxy", 1);
 mongoose.set("autoIndex", !IS_PROD);
 mongoose.set("bufferCommands", false);
 
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log("Server running");
+    });
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
 app.use(
   helmet({
     crossOriginResourcePolicy: false,
