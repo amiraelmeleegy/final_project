@@ -34,6 +34,8 @@ function maskMongoUri(uri) {
   }
 }
 
+mongoose.connect(process.env.MONGO_URI)
+
 const connectDB = async () => {
   const uri = process.env.MONGO_URI;
 

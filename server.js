@@ -58,6 +58,17 @@ app.set("trust proxy", 1);
 mongoose.set("autoIndex", !IS_PROD);
 mongoose.set("bufferCommands", false);
 
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    server.listen(PORT, HOST, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+
 app.use(
   helmet({
     crossOriginResourcePolicy: false,
@@ -1137,6 +1148,10 @@ async function gracefulShutdown(signal) {
     process.exit(0);
   }
 }
+
+app.get("/", (req, res) => {
+  res.send("Server is running 🚀");
+});
 
 process.on("SIGINT", () => gracefulShutdown("SIGINT"));
 process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
